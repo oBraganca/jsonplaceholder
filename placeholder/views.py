@@ -52,7 +52,6 @@ def index(request):
         else:
             # Se nao tiver um shearch no GET, vai continuar normalmente
             obj_paginator = Paginator(users, content_page)
-            print(users)
 
         # Pega o valor por GET vindo do ajax 
         if request.GET.get('page'):
