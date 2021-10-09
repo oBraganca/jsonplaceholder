@@ -1,0 +1,67 @@
+<!-- Carregando oque será necessario  -->
+{% extends "base.html" %} <!-- Usar parde do html da base.html -->
+{% load static %} <!-- Carregar os arquivos estaticos como o js, img e css -->
+{% block content %} <!-- Bloco de conteudo vindo do base.html -->
+
+<h2 class="text-center">Informações de usuário</h2>
+<div class="container loader">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="search-div" align="center">
+  <input class="form-control col-md-6 col-auto" type="search" name="search" id="search" placeholder="Buscar por nome de usuario" value="{{ request.GET.search }}">
+</div>
+<div class="container-fluid" id='users_pag' align="center">
+  <!-- Iterar os dados fornecido pela view, que nesse caso são os usuarios-->
+  {% for user in users %} 
+  <div class="col-md-6 col-auto">
+    <div class="card">
+      <div class="card-header">
+        <!-- 
+          Usamos o ponto para acessar a dicionario como se fosse um classe vindo do model,
+          porém é apenas um dicionario
+        -->
+        Identificação de Usuario:{{user.id}}
+      </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{user.id}}</li>
+          <li class="list-group-item">{{user.name}}</li>
+          <li class="list-group-item">{{user.username}}</li>
+          <li class="list-group-item">{{user.email}}</li>
+        </ul>
+    </div>
+    <br><br>
+  </div>
+
+  
+  {% endfor %}
+  <div aria-label="Page navigation example">
+    <ul class="pagination">
+      <!-- Se a pagina atual for igual a 1, o botão de voltar vai estar desabilidato e
+        vai ter algum valor no href, se não, vai ficar desabilitado e href nulo -->
+      
+        <li class="page-item {%if page_atual == 1 %}disabled{%endif%}"><a class="page-link" href="{%if page_atual != 1 %}{{prev}}{%endif%}">Previous</a></li>
+      
+      <!-- Iterar os dados fornecido pela view, que nesse caso é o range da paginação -->
+      
+      {% for i in page_range %}
+        <!-- o page_range retorna algo parecido com: renge(1, 4) onde o primeiro parametro vai ser o inicio
+          e o ultimo sera o elemento excluido, ou seja, o ultimo elemento do range vai ser 4 - 1 nesse caso.
+        -->
+
+        <!-- Se a pagina atual for igual ao "i" (valor vindo do page_range) o li vai receber uma classe active
+        se não, vai ficar sem o active
+        e o valor href vai ser o "i"
+        -->
+        <li class="page-item {% if page_atual == i %}active{%endif%}"><a class="page-link link_option" href="{{i}}">{{i}}</a></li>
+      {% endfor %}
+      
+      <!-- Se a pagina atual for igual a end, o botão de avançar vai estar desabilidato e
+        vai ter algum valor no href, se não, vai ficar desabilitado e href nulo -->
+      <li class="page-item {%if page_atual == end %}disabled{%endif%}"><a class="page-link" href="{%if prox <= end %}{{prox}}{%endif%}">Next</a></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+/* Resetar alguns estilos padrão do navegador*/
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo do index */
+.text-center{
+    margin-bottom: 2rem;
+}
+    /* Pesquisa em tempo real */
+.search-div{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+    /* Load da paginação */
+.loader{
+    position: absolute; /* Posição absoluta para sobrepor os outros conteudos*/
+    display: flex; /*Deixar os elementos flexiveis*/
+    justify-content: center; /*Centralizar o loader*/
+    margin-top: 5rem;
+}
+.spinner-border{
+    padding: 5%; /* Porcentagem para ficar mais responsivo */
+    z-index: 1; /* Ze index para deixar o elementos sobre os soutros*/
+}
+
+    /* Paginação no index */
+
+.pagination{
+    /*
+        Esse estilo so é possivel quando a div esta com display flixivel
+        mas essa classe do boostrap ja vem com esse estilo, aproveitei e deixei justificado
+        no centro. 
+    */
+    justify-content: center;
+}
